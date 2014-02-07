@@ -1,0 +1,40 @@
+<html>
+<head>
+  <script src="cookies.js"></script>
+</head>
+
+<body>
+  <p>Page loaded at <time id="load-time"></time></p>
+  <p id="cookie-status"></p>
+  <p>This will open a new window, and will do something when it's closed.</p>
+  <button id="new-window-button">Open New Window</button>
+  
+  <script>
+  var btn = document.getElementById('new-window-button');
+  var stat = document.getElementById('cookie-status');
+  var time = document.getElementById('load-time');
+  var cookieWindow;
+
+  btn.addEventListener('click', function() {
+    var left = (window.screen.width - 500) / 2;
+    var top = (window.screen.height - 300) / 2;
+    cookieWindow = window.open(
+      'cookie-setter.html', '_blank', 
+      'width=600,height=300,left=' + left + ',top=' + top
+    );
+  });
+
+  function updateCookieStatus() {
+    var cookieValue = getCookie('my-cookie');
+    if (cookieValue === '') {
+      stat.innerHTML = 'Your cookie is empty or unset.';
+    } else {
+      stat.innerHTML = 'Your cookie is set to &quot;' + cookieValue + '&quot;.'
+    }
+  }
+
+  updateCookieStatus();
+  time.innerHTML = new Date();
+  </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<html>
+<head>
+  <script src="cookies.js"></script>
+</head>
+
+<body>
+  <p>Enter a new value for your cookie and press ok.</p>
+  <input type="text" name="cookie-value" id="cookie-value-field">
+  <button id="set-cookie-button">Set the cookie</button>
+  
+  <script>
+  var btn = document.getElementById('set-cookie-button');
+  var field = document.getElementById('cookie-value-field');
+  var authWindow;
+
+  btn.addEventListener('click', function(evt) {
+    setCookie('my-cookie', field.value);
+    window.opener.updateCookieStatus();
+    window.opener.cookieWindow.close();
+  });
+
+  field.setAttribute('value', getCookie('my-cookie'));
+  </script>
+</body>
+</html>
